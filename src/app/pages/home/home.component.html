@@ -1,3 +1,28 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="home">
+    <h1 class="page-title">Medals per country</h1>
+    <div class="stats-container">
+        <app-stat-component [stat]="olympicGamesStat"></app-stat-component>
+        <app-stat-component [stat]="countriesStat"></app-stat-component>
+    </div>
+
+    <div class="chart-container">
+        <ngx-charts-pie-chart
+            [maxLabelLength]="30"
+            [results]="pieChartData"
+            [labels]="true"
+            (select)="onSelect($event)"
+        >
+            <ng-template #tooltipTemplate let-model="model">
+                <div *ngFor="let data of pieChartData; let i = index">
+                    <div *ngIf="data.name === model.name" class="tooltip">
+                        <p>{{model.name}}</p>
+                        <p class="tooltip-content">
+                            <img src="../../../assets/icons/medal.png" alt="">
+                            <span>{{data.value}}</span>
+                        </p>
+                    </div> 
+                </div>   
+            </ng-template>
+        </ngx-charts-pie-chart>
+    </div>
+</div>

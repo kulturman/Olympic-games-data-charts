@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+.page-title {
+    color: white;
+    background-color: #03828F;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.ngx-charts-tooltip-content.type-tooltip {
+    background-color: #03828F !important;
+    color: white;
+}
+
+.ngx-charts-tooltip-content.type-tooltip::after {
+    background-color: #03828F !important;
+    color: white;
+}
+
+.tooltip {
+    min-width: 100px;
+}
+
+.tooltip-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
