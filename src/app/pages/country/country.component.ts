@@ -31,8 +31,8 @@ export class CountryComponent implements OnInit, OnDestroy {
     });
     this.olympics$ = this.olympicService.getOlympics();
 
-    this.subscription = this.olympics$.subscribe(allCountriesData => {
-      const country: Olympic | undefined = allCountriesData.find(data => data.country === this.countryName);
+    this.subscription = this.olympics$?.subscribe(allCountriesData => {
+      const country: Olympic | undefined = allCountriesData?.find(data => data.country === this.countryName);
 
       if (country === undefined) {
         this.router.navigate(['']);
@@ -47,7 +47,7 @@ export class CountryComponent implements OnInit, OnDestroy {
         return previousValue + currentValue.athleteCount;
       }, 0);
 
-      this.entriesStat = { label: 'Number of entries', data: country.participations.length.toString()};
+      this.entriesStat = { label: 'Number of entries', data: country.participations?.length.toString()};
       this.medalsStat = { label: 'Total number of medals', data: totalNumberOfMedals.toString()};
       this.athletesStat = { label: 'Total number of athletes', data: totalNumberOfAthletes.toString()};
 

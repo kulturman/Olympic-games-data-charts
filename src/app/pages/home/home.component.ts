@@ -26,13 +26,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-    
-    this.subscription = this.olympics$.subscribe(allCountriesData => {
-      this.countriesStat = { label: 'Number of countries',  data: allCountriesData.length.toString() };
-      this.olympicGamesStat = { label: "Number of JOs" , data: allCountriesData[0].participations.length.toString()};
+
+    this.subscription = this.olympics$?.subscribe(allCountriesData => {
+      this.countriesStat = { label: 'Number of countries',  data: allCountriesData?.length.toString() };
+      this.olympicGamesStat = { label: "Number of JOs" , data: allCountriesData?.[0].participations.length.toString()};
       this.pieChartData = [];
 
-      allCountriesData.forEach(countryData => {
+      allCountriesData?.forEach(countryData => {
         this.pieChartData.push({
           name: countryData.country,
           value: countryData.participations.reduce((previousValue, currentValue) => {
