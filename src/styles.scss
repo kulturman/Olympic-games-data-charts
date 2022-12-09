@@ -7,6 +7,16 @@
     border-radius: 10px;
 }
 
+a:visited {
+    color: blue;
+}
+
+.container {
+    margin: auto;
+    max-width: 600px;
+    text-align: center;
+}
+
 .ngx-charts-tooltip-content.type-tooltip {
     background-color: #03828F !important;
     color: white;

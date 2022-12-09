@@ -1,0 +1,24 @@
+<div class="container">
+    <h1 class="page-title">
+        {{ countryName }}
+    </h1>
+    <div class="stats-container">
+        <app-stat-component [stat]="entriesStat"></app-stat-component>
+        <app-stat-component [stat]="medalsStat"></app-stat-component>
+        <app-stat-component [stat]="athletesStat"></app-stat-component>
+    </div>
+
+    <div class="chart-container">
+        <ngx-charts-line-chart
+            [showXAxisLabel]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [xAxisLabel]="'Dates'"
+            [timeline]="true"
+            [results]="chartData"
+            >
+        </ngx-charts-line-chart>
+    </div>
+
+    <a routerLink="">Return to home</a>
+</div>

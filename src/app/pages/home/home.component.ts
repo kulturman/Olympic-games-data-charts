@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, of, Subscription } from 'rxjs';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { Stat } from 'src/app/core/models/Stat';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -9,19 +10,24 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public olympics$!: Observable<Olympic[]>;
   public countriesStat!: Stat;
-  public olympicGamesStat = { label: 'Number of JOs', data: '20' };
+  public olympicGamesStat!: Stat;
+  private subscription!: Subscription;
 
   public pieChartData!: Array<{ name: string, value: number }>;
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService, private router: Router) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     
-    this.olympics$.subscribe(allCountriesData => {
+    this.subscription = this.olympics$.subscribe(allCountriesData => {
       this.countriesStat = { label: 'Number of countries',  data: allCountriesData.length.toString() };
       this.olympicGamesStat = { label: "Number of JOs" , data: allCountriesData[0].participations.length.toString()};
       this.pieChartData = [];
@@ -39,6 +45,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSelect(data: { name: string, value: number, label: string }): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    this.router.navigate(['countries', data.name]);
   }
 }

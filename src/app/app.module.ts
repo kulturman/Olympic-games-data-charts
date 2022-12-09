@@ -7,10 +7,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StatComponentComponent } from './components/stat-component/stat-component.component';
+import { CountryComponent } from './pages/country/country.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, StatComponentComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, StatComponentComponent, CountryComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
