@@ -7,6 +7,18 @@
     border-radius: 10px;
 }
 
+@media (max-width:670px) {
+    .stats-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .stats {
+        display: block;
+    }
+}
+
 a:visited {
     color: blue;
 }

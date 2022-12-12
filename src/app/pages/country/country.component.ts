@@ -34,30 +34,30 @@ export class CountryComponent implements OnInit, OnDestroy {
     this.subscription = this.olympics$?.subscribe(allCountriesData => {
       const country: Olympic | undefined = allCountriesData?.find(data => data.country === this.countryName);
 
-      if (country === undefined) {
+      if (!country && allCountriesData) {
         this.router.navigate(['']);
         return;
       }
 
-      const totalNumberOfMedals = country.participations.reduce((previousValue, currentValue) => {
+      const totalNumberOfMedals = country?.participations.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.medalsCount;
       }, 0);
 
-      const totalNumberOfAthletes = country.participations.reduce((previousValue, currentValue) => {
+      const totalNumberOfAthletes = country?.participations.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.athleteCount;
       }, 0);
 
-      this.entriesStat = { label: 'Number of entries', data: country.participations?.length.toString()};
-      this.medalsStat = { label: 'Total number of medals', data: totalNumberOfMedals.toString()};
-      this.athletesStat = { label: 'Total number of athletes', data: totalNumberOfAthletes.toString()};
+      this.entriesStat = { label: 'Number of entries', data: country ? country.participations?.length.toString(): ''};
+      this.medalsStat = { label: 'Total number of medals', data: totalNumberOfMedals ? totalNumberOfMedals.toString(): ''};
+      this.athletesStat = { label: 'Total number of athletes', data: totalNumberOfAthletes ? totalNumberOfAthletes.toString(): ''};
 
       this.chartData = [
         {
           name: this.countryName,
-          series: country.participations.map(participation => ({
+          series: country ? country.participations.map(participation => ({
             name: participation.year.toString(),
             value: participation.medalsCount
-          }))
+          })): []
         }
       ]
     })
