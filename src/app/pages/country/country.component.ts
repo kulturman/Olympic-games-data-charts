@@ -36,7 +36,6 @@ export class CountryComponent implements OnInit, OnDestroy {
 
       if (!country && allCountriesData) {
         this.router.navigate(['']);
-        return;
       }
 
       const totalNumberOfMedals = country?.participations.reduce((previousValue, currentValue) => {
